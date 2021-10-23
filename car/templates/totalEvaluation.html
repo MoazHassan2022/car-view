@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>carmap</title>
+    <style>
+        .flex-container {
+            display: flex;
+        }
+
+        .flex-child {
+            flex: 1;
+            border: 2px solid blue;
+            text-align: center;
+        }
+
+        .flex-child:first-child {
+            margin-right: 20px;
+        }
+    </style>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'ar', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</head>
+<body>
+<div id="google_translate_element"></div>
+<div class="flex-container">
+    <div class="flex-child magenta">
+            <h1>أفضل السيارات:</h1>
+        <h2><a href="/{{ frst.id }}">{{ frst.name }}</a></h2>
+        <h2><a href="/{{ sec.id }}">{{ sec.name }}</a></h2>
+        <h2><a href="/{{ third.id }}">{{ third.name }}</a></h2>
+
+    </div>
+    <div class="flex-child green">
+            <h1>أسوأ السيارات:</h1>
+        <h2><a href="/{{ fourth.id }}">{{ fourth.name }}</a></h2>
+        <h2><a href="/{{ fifth.id }}">{{ fifth.name }}</a></h2>
+        <h2><a href="/{{ sixth.id }}">{{ sixth.name }}</a></h2>
+
+    </div>
+</div>
+</body>
+</html>

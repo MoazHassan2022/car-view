@@ -1,0 +1,366 @@
+<!-- List -->
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>
+            Carmap
+        </title>
+        <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'ar', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    </head>
+    <body dir="rtl">
+        <div class="main vertical">
+            <div class="container horizontal" id="navbar">
+                <a href="/">الرئيسية</a>
+            </div>
+            <div class="container horizontal" id="navbar1">
+                <h5>أنت الزائر رقم {{ viewsCount }}</h5>
+            </div>
+            <div id="google_translate_element"></div>
+
+            <div class="enwan">
+                <h2>السيارات</h2>
+            </div>
+            <form class="w3-container" method="POST" enctype="multipart/form-data">
+                <input type="text" name="search" placeholder="ابحث باسم السيارة" style="width:200px;">
+                <p>
+              <label>صنف حسب قوة الموتور: </label>
+                <select name='motorSt' class='w3-input'>
+                    <option value="">-------</option>
+                    <option value="1.0">1.0 لتر</option>
+                    <option value="1.1">1.1 لتر</option>
+                    <option value="1.2">1.2 لتر</option>
+                    <option value="1.3">1.3 لتر</option>
+                    <option value="1.4">1.4 لتر</option>
+                    <option value="1.5">1.5 لتر</option>
+                    <option value="1.6">1.6 لتر</option>
+                    <option value="1.7">1.7 لتر</option>
+                    <option value="1.8">1.8 لتر</option>
+                    <option value="1.9">1.9 لتر</option>
+                    <option value="2.0">2.0 لتر</option>
+                    <option value="2.1">2.1 لتر</option>
+                    <option value="2.2">2.2 لتر</option>
+                    <option value="2.3">2.3 لتر</option>
+                    <option value="2.4">2.4 لتر</option>
+                    <option value="2.5">2.5 لتر</option>
+                    <option value="2.6">2.6 لتر</option>
+                    <option value="2.7">2.7 لتر</option>
+                    <option value="2.8">2.8 لتر</option>
+                    <option value="2.9">2.9 لتر</option>
+                    <option value="3.0">3.0 لتر</option>
+                    <option value="3.1">3.1 لتر</option>
+                    <option value="3.2">3.2 لتر</option>
+                    <option value="3.3">3.3 لتر</option>
+                    <option value="3.4">3.4 لتر</option>
+                    <option value="3.5">3.5 لتر</option>
+                    <option value="3.6">3.6 لتر</option>
+                    <option value="3.7">3.7 لتر</option>
+                    <option value="3.8">3.8 لتر</option>
+                    <option value="3.9">3.9 لتر</option>
+                    <option value="4.0">4.0 لتر</option>
+                    <option value="4.1">4.1 لتر</option>
+                    <option value="4.2">4.2 لتر</option>
+                    <option value="4.3">4.3 لتر</option>
+                    <option value="4.4">4.4 لتر</option>
+                    <option value="4.5">4.5 لتر</option>
+                    <option value="4.6">4.6 لتر</option>
+                    <option value="4.7">4.7 لتر</option>
+                    <option value="4.8">4.8 لتر</option>
+                    <option value="4.9">4.9 لتر</option>
+                    <option value="5.0">5.0 لتر</option>
+                </select>
+              </p>
+              <p>
+              <label>صنف حسب الموديل: </label>
+                <select name='model' class='w3-input'>
+                    <option value="">-------</option>
+                    {% for m in models %}
+                    <option value="{{ m.modelText }}">{{ m.modelText }}</option>
+                    {% endfor %}
+                </select>
+              </p>
+              <p>
+              <label>صنف حسب النوع: </label>
+                <select name='sort' class='w3-input'>
+                    <option value="">-------</option>
+                    {% for s in sorts %}
+                    <option value="{{ s.sortText }}">{{ s.sortText }}</option>
+                    {% endfor %}
+                </select>
+              </p>
+              <input type="text" name="date" placeholder="ادخل سنة الاصدار" style="width:200px;">
+              <p>
+              {% csrf_token %}
+              <input type='submit' value='ابحث' class='w3-btn w3-green'>
+              <a href="/list" class='w3-btn w3-green'>كل السيارات</a>
+                <a href="/ads" class='w3-btn w3-green'>كل الاعلانات</a>
+                <br><br>
+                <a href="/list/A" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">A</a>
+                <a href="/list/B" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">B</a>
+                <a href="/list/C" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">C</a>
+                <a href="/list/D" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">D</a>
+                <a href="/list/E" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">E</a>
+                <a href="/list/F" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">F</a>
+                <a href="/list/G" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">G</a>
+                <a href="/list/H" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">H</a>
+                <a href="/list/I" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">I</a>
+                <a href="/list/J" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">J</a>
+                <a href="/list/K" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">K</a>
+                <a href="/list/L" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">L</a>
+                <a href="/list/M" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">M</a>
+                <a href="/list/N" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">N</a>
+                <a href="/list/O" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">O</a>
+                <a href="/list/P" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">P</a>
+                <a href="/list/Q" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">Q</a>
+                <a href="/list/R" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">R</a>
+                <a href="/list/S" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">S</a>
+                <a href="/list/T" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">T</a>
+                <a href="/list/U" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">U</a>
+                <a href="/list/V" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">V</a>
+                <a href="/list/W" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">W</a>
+                <a href="/list/X" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">X</a>
+                <a href="/list/Y" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">Y</a>
+                <a href="/list/Z" class='w3-btn w3-green' style="padding:0px; width:20px; height:20px;">Z</a>
+
+
+            </form>
+            <a href="mailto:prosign.2020.com@gmail.com" style="padding:13px; width:130px;">الابلاغ عن خطأ</a>
+            <div class="container horizontal">
+	    {% if cars %}
+            {% for car in cars.object_list %}
+
+                <div class="card">
+
+                    <div class="parent">
+                        {% if car.image %}
+                        <img src="{{ car.image }}">
+                        {% endif %}
+                        {% if car.logo %}
+                        <div class="container logo vertical center">
+                            <img src="{{ car.logo }}">
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="container vertical center">
+                        <h3>{{ car.name }}</h3>
+                        <div class="container horizontal">
+                            <a href='/{{ car.id }}' class='btn'>عرض</a>
+                            <a href="{% url 'first' car.id %}" class='btn'>قارن</a>
+                            <a href="{% url 'evaluate' car.id %}" class='btn'>تقييم</a>
+                            <a href="{% url 'addFavGen' car.id %}" class='btn'>اقترح للزائرين</a>
+                        </div>
+
+                        <br/><br/>
+                    </div>
+                </div>
+            {% endfor %}
+
+
+	    {% else %}
+                <h2>لا توجد سيارات بهذه المواصفات.</h2>
+                {% endif %}
+            </div>
+            {% load static %}
+            <div onclick="topFunction()" id="home">
+                <img id="upCar" src="{% static 'home.png' %}">
+            </div>
+            <div>
+                    {% if cars.has_previous %}
+                    <h3 style="text-align:center;"><a href="?page={{ cars.previous_page_number }}">السابق</a></h3>
+                    {% endif %}
+                    {% if cars.has_next %}
+                    <h3 style="text-align:center;"><a href="?page={{ cars.next_page_number }}">التالي</a></h3>
+                    {% endif %}
+                </div>
+            <br><br><br>
+            <div class="container horizontal" id="adBanner">
+                <h4>بانر إعلاني "تجريبي"</h4>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+
+
+            //Get the button:
+            var mybutton = document.getElementById("upCar");
+
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {scrollFunction()};
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    mybutton.style.display = "block";
+                } else {
+                    mybutton.style.display = "none";
+                    mybutton.classList.remove("voom");
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+            mybutton.classList.add("voom");
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            }
+
+
+    </script>
+
+        <style>
+            *{
+    margin:0;
+    padding:0;
+    text-align: right;
+    transition: all .2s;
+    scroll-behavior:smooth;
+}
+
+.main{
+    max-width: 100vw;
+    display: flex;
+    flex-direction: unset;
+    background-color: rgb(221, 218, 218);
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: unset;
+    width: 100%;
+}
+
+.enwan{
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 35px;
+}
+
+.vertical{
+    flex-direction: column;
+}
+.horizontal{
+    flex-direction: row;
+}
+.horizontal a{
+    margin-left: 5px;
+}
+.center{
+    align-items: center;
+}
+
+#navbar
+{
+    height: 30px;
+    background-color: #4aab5e;
+    justify-content: left;
+}
+#navbar a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+#navbar a:hover{
+    color: black;
+    cursor: pointer;
+}
+#navbar1
+{
+    height: 40px;
+    background-color: #4aab5e;
+    justify-content: left;
+}
+#navbar1 h5{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+.card{
+    width:400px;
+    height: 350px;
+    background-color: white;
+    color: black;
+    border-color:transparent;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    border-radius: 5px;
+}
+.card .parent{
+    width: 100%;
+    height: 80%;
+    position: relative;
+}
+.parent img{
+    width:100%;
+    height:90%;
+    object-fit: cover;
+}
+.logo{
+    background: none;
+    background-color: none;
+    position: absolute;
+    bottom: 0;
+}
+.logo img{
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    object-fit: scale-down;
+}
+.btn{
+    text-decoration: none;
+    color: gray;
+    background: none;
+}
+.btn:hover{
+    background-color: rgba(100, 100, 100, 0.479);
+}
+
+#home {
+  position: fixed; /* Fixed/sticky position */
+  bottom: 10px; /* Place the button at the bottom of the page */
+  left: 10px; /* Place the button 30px from the right */
+  cursor: pointer; /* Add a mouse pointer on hover */
+}
+#upCar{
+    display: none; /* Hidden by default */
+    object-fit: contain;
+    width: 50px;
+    height: 50px;
+
+    position: fixed; /* Fixed/sticky position */
+  bottom: 50px; /* Place the button at the bottom of the page */
+  left: 10px; /* Place the button 30px from the right */
+}
+.voom{
+    transform: translate(0, -1000px);
+}
+
+#adBanner{
+    height: 40px;
+    background-color: #4aab5e;
+    position: fixed;
+    bottom: 0;
+}
+
+
+@media (max-width: 600px){
+
+}
+
+        </style>
+        
+    </body>
+</html>
