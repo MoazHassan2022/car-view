@@ -87,6 +87,10 @@ def edit(request, id):
             c.logo = r.get('logo')
         if r.get('video_url') != '':
             c.video = r.get('video_url')
+            if c.video:
+                r = re.compile(
+                    '(?:(?:https?\:\/\/)?(?:www\.)?(?:youtube|youtu)(?:(?:\.com|\.be)\/)(?:embed\/)?(?:watch\?)?(?:feature=player_embedded)?&?(?:v=)?([0-z]{11}|[0-z]{4}(?:\-|\_)[0-z]{4}|.(?:\-|\_)[0-z]{9}))')
+                c.videoID = r.match(c.video).groups()[0]
         if r.get('date') != '':
             c.date = r.get('date')
         if r.get('flaws') != '':
