@@ -1,0 +1,28 @@
+<!-- List -->
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>
+            Carmap
+        </title>
+    </head>
+    <body dir="rtl">
+            <h2>المستخدمين</h2>
+            <a href="/list-admin" class='w3-btn w3-green' style="width:120px;">كل السيارات</a>
+    {% for u in users %}
+    <div>
+    <hr>
+    <h4>{{ u.username }}</h4>
+    {% if u.banned %}
+    <a href="{% url 'unban' u.id %}" class='w3-btn w3-green' style="width:70px;">فك الحظر</a>
+    {% else %}
+    <a href="{% url 'ban' u.id %}" class='w3-btn w3-green' style="width:70px;">حظر</a>
+    {% endif %}
+    <hr>
+    </div>
+    {% endfor %}
+
+    </body>
+</html>

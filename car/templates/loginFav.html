@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ar">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>Carmap</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'car/styles.css' %}" rel="stylesheet">
+        <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'ar', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    </head>
+    <body dir='rtl'>
+    <div id="google_translate_element"></div>
+        <h2>تسجيل الدخول</h2>
+    <a href="mailto:prosign.2020.com@gmail.com" style="padding:13px; width:130px;">الابلاغ عن خطأ</a>
+
+        {% if message %}
+            <div>{{ message }}</div>
+        {% endif %}
+
+        <form action="{% url 'addToFavList' CID %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input autofocus class="form-control" type="text" name="username" placeholder="اسم المستخدم">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="كلمة المرور">
+            </div>
+            <input class="btn btn-primary" type="submit" value="الدخول">
+        </form>
+
+        <p>ليس لديك حساب؟</p> <a href="{% url 'register' %}">سجل حساب من هنا</a>
+
+    </body>
+</html>

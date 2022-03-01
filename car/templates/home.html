@@ -1,0 +1,86 @@
+<!-- Home -->
+
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+      body, html {
+        height: 100%;
+        margin: 0;
+      }
+
+      .bgimg {
+        background-image: url('https://www.w3schools.com/w3images/forestbridge.jpg');
+        height: 100%;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        color: white;
+        font-family: "Courier New", Courier, monospace;
+        font-size: 25px;
+      }
+
+      .topleft {
+        position: absolute;
+        top: 0;
+        left: 16px;
+      }
+
+      .bottomleft {
+        position: absolute;
+        bottom: 0;
+        left: 16px;
+      }
+
+      .middle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+
+      hr {
+        margin: auto;
+        width: 40%;
+      }
+      .w3-input {
+      background-color: rgba(0,0,0,0.1);
+      color: white;
+      border: none;
+      border-bottom: 1px white solid;
+      }
+    </style>
+
+  </head>
+  <body>
+
+    <div class="bgimg">
+      <div class="middle">
+        <h1>أهلاً بك</h1>
+        <hr>
+        <p>
+          <br><br><br><br><br><br><br><br><br>
+          <a href='/list' class='w3-btn w3-green'>كل السيارات</a>
+          <a href="{% url 'AdName' %}" class='w3-btn w3-green'>أضف اعلان</a>
+          <a href="{% url 'login' %}" class='w3-btn w3-green'>تسجيل دخول</a>
+          <br><br>
+          <a href="{% url 'favList' %}" class='w3-btn w3-green'>السيارات المفضلة</a>
+
+          <br><br>
+          <a href="{% url 'totalEvaluation' %}" class='w3-btn w3-green'>احصائيات السيارات</a>
+          <br><br>
+          <a href="{% url 'genFavList' %}" class='w3-btn w3-green'>السيارات المفضلة للزائرين</a>
+        </p>
+        <br><br><br><br><br><br><br><br>
+        {% if user.is_superuser %}
+        <a href='/authorize' class='w3-btn w3-green'> كل السيارات (خاص بالأدمن)</a>
+        <a href='/authorize-add' class='w3-btn w3-green'>إضافة (خاص بالأدمن)</a>
+        <a href='/users' class='w3-btn w3-green'>المستخدمين (خاص بالأدمن)</a>
+        {% endif %}
+      </div>
+
+    </div>
+  </body>
+</html>

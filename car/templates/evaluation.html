@@ -1,0 +1,224 @@
+<!-- Add -->
+
+<html>
+	<head>
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+		  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    	<title>
+        	Carmap
+        </title>
+        <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'ar', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    </head>
+    <body dir='rtl'>
+
+      <br>
+      <div class="w3-container">
+          <div id="google_translate_element"></div>
+      	<div class="w3-card-4">
+          <div class="w3-container w3-green">
+            <h2>تقييم السيارة</h2>
+          </div>
+          <form class="w3-container" method="POST">
+              {% csrf_token %}
+              <p>
+              <label>الارسال: </label>
+                <select name='sending' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>الجسم/الطلاء: </label>
+                <select name='body' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>الملحقات الداخلية: </label>
+                <select name='inside' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>العجلات/المحاور: </label>
+                <select name='wheels' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>القيادة: </label>
+                <select name='driving' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>النوافذ/الزجاج الأمامي: </label>
+                <select name='glass' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>المحرك: </label>
+                <select name='motor' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>المكيف/السخان: </label>
+                <select name='cond' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>التعليق: </label>
+                <select name='comment' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>الملحقات الخارجية: </label>
+                <select name='outside' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>النظام الكهربائي: </label>
+                <select name='electric' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>أحزمة المقاعد/الأكياس الهوائية: </label>
+                <select name='seat' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>الفرامل: </label>
+                <select name='breaks' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>نظام الوقود: </label>
+                <select name='fuel' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>الأنوار: </label>
+                <select name='light' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>التوجية: </label>
+                <select name='tawgeeh' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>نظام التبريد: </label>
+                <select name='tabreed' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>نظام العادم: </label>
+                <select name='aadem' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <p>
+              <label>القابض: </label>
+                <select name='qabed' class='w3-input'>
+                    <option value="0">اختر التقييم</option>
+                    <option value="1">جيد جدا</option>
+                    <option value="2">جيد</option>
+                    <option value="3">متوسط</option>
+                    <option value="4">سيئ</option>
+                </select>
+              </p>
+              <input type='submit' value='تقييم' class='w3-btn w3-green'>
+          </form>
+        </div>
+   	  </div>
+    </body>
+</html>

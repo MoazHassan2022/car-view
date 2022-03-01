@@ -1,0 +1,476 @@
+<!-- View -->
+
+<html>
+	<head>
+		<title>
+			Carmap
+		</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<style>
+			.video-container {
+			    position: relative;
+			    padding-bottom: 56.25%; /* 16:9 */
+			    height: 0;
+			}
+			.video-container iframe {
+			    position: absolute;
+			    top: 0;
+			    left: 0;
+			    width: 100%;
+			    height: 100%;
+			}
+		</style>
+		<script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'ar', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+	</head>
+	<body dir="rtl">
+		<div class="w3-container">
+			<div id="google_translate_element"></div>
+			<div class="container horizontal" id="navbar">
+				<a href="/" class='w3-btn center'>الرئيسية</a>
+				<a href="{% url 'AdRest' car.id %}" class='w3-btn center'>أضف اعلان</a>
+			{% if user.is_authenticated %}
+			{% if exists %}
+			<a href="{% url 'removeFavList' car.id %}" style="color:red;" class='w3-btn center'>أزل من المفضلة</a>
+			{% else %}
+			<a href="{% url 'addToFavList' car.id %}" class='w3-btn center'>أضف للمفضلة</a>
+			{% endif %}
+			{% else %}
+			<a href="{% url 'addToFavList' car.id %}" class='w3-btn center'>أضف للمفضلة</a>
+			{% endif %}
+				<a href="mailto:prosign.2020.com@gmail.com" class='w3-btn center'>الابلاغ عن خطأ</a>
+			</div>
+		  	<h2 align="center">{{ car.name }}</h2>
+
+			{% if car.image %}
+			<img src="{{ car.image }}" alt="Alps" style="width:100%">
+			{% endif %}
+		  	<div class="w3-card-4">
+		    	<div class="w3-container w3-center mrgndwn">
+					<h4 class="label txtdrk">التفاصيل: </h4>
+		      		<p>{{ car.details|linebreaks }}</p>
+		    	</div>
+				<div class="w3-container w3-center mrgndwn">
+					<h4 class="label txtdrk">العيوب: </h4>
+					{% if car.flaws %}
+		      		<p>{{ car.flaws|linebreaks }}</p>
+					{% else %}
+					<p>لا توجد عيوب</p>
+					{% endif %}
+		    	</div>
+				<div class="w3-container w3-center mrgndwn">
+					<h4 class="label txtdrk">تاريخ اصدار السيارة: </h4>
+		      		<h5>{{ car.date }}</h5>
+		    	</div>
+				<div class="w3-container w3-center mrgndwn">
+					<h4 class="label txtdrk">سعر السيارة: </h4>
+		      		<h5>{{ car.price }} $ </h5>
+		    	</div>
+				<div class="w3-container horizontal right space"> </div>
+				<div class="w3-container w3-center">
+					<h4 class="txtdrk">تقييم السيارة: </h4>
+					<div class="row">
+						<h4 class="cell"></h4>
+						<h4 class="cell">جيد جدًا</h4>
+						<h4 class="cell">جيد</h4>
+						<h4 class="cell">متوسط</h4>
+						<h4 class="cell">سيء</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">الإرسال:</h5>
+						<h4 class="cell dark">{{ car.sendingVery }}</h4>
+						<h4 class="cell">{{ car.sendingGood }}</h4>
+						<h4 class="cell dark">{{ car.sendingMed }}</h4>
+						<h4 class="cell">{{ car.sendingBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">الجسم/الطلاء:</h5>
+						<h4 class="cell dark">{{ car.bodyVery }}</h4>
+						<h4 class="cell">{{ car.bodyGood }}</h4>
+						<h4 class="cell dark">{{ car.bodyMed }}</h4>
+						<h4 class="cell">{{ car.bodyBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">الملحقات الداخلية:</h5>
+						<h4 class="cell dark">{{ car.insideVery }}</h4>
+						<h4 class="cell">{{ car.insideGood }}</h4>
+						<h4 class="cell dark">{{ car.insideMed }}</h4>
+						<h4 class="cell">{{ car.insideBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">العجلات/المحاور:</h5>
+						<h4 class="cell dark">{{ car.wheelsVery }}</h4>
+						<h4 class="cell">{{ car.wheelsGood }}</h4>
+						<h4 class="cell dark">{{ car.wheelsMed }}</h4>
+						<h4 class="cell">{{ car.wheelsBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">القيادة:</h5>
+						<h4 class="cell dark">{{ car.drivingVery }}</h4>
+						<h4 class="cell">{{ car.drivingGood }}</h4>
+						<h4 class="cell dark">{{ car.drivingMed }}</h4>
+						<h4 class="cell">{{ car.drivingBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">النوافذ/الزجاج الأمامي:</h5>
+						<h4 class="cell dark">{{ car.glassVery }}</h4>
+						<h4 class="cell">{{ car.glassGood }}</h4>
+						<h4 class="cell dark">{{ car.glassMed }}</h4>
+						<h4 class="cell">{{ car.glassBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">المحرك:</h5>
+						<h4 class="cell dark">{{ car.motorVery }}</h4>
+						<h4 class="cell">{{ car.motorGood }}</h4>
+						<h4 class="cell dark">{{ car.motorMed }}</h4>
+						<h4 class="cell">{{ car.motorBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">المكيف/السخان:</h5>
+						<h4 class="cell dark">{{ car.condVery }}</h4>
+						<h4 class="cell">{{ car.condGood }}</h4>
+						<h4 class="cell dark">{{ car.condMed }}</h4>
+						<h4 class="cell">{{ car.condBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">التعليق:</h5>
+						<h4 class="cell dark">{{ car.commentVery }}</h4>
+						<h4 class="cell">{{ car.commentGood }}</h4>
+						<h4 class="cell dark">{{ car.commentMed }}</h4>
+						<h4 class="cell">{{ car.commentBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">الملحقات الخارجية:</h5>
+						<h4 class="cell dark">{{ car.outsideVery }}</h4>
+						<h4 class="cell">{{ car.outsideGood }}</h4>
+						<h4 class="cell dark">{{ car.outsideMed }}</h4>
+						<h4 class="cell">{{ car.outsideBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">النظام الكهربائي:</h5>
+						<h4 class="cell dark">{{ car.electricVery }}</h4>
+						<h4 class="cell">{{ car.electricGood }}</h4>
+						<h4 class="cell dark">{{ car.electricMed }}</h4>
+						<h4 class="cell">{{ car.electricBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">أحزمة المقاعد/الأكياس الهوائية:</h5>
+						<h4 class="cell dark">{{ car.seatVery }}</h4>
+						<h4 class="cell">{{ car.seatGood }}</h4>
+						<h4 class="cell dark">{{ car.seatMed }}</h4>
+						<h4 class="cell">{{ car.seatBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">الفرامل:</h5>
+						<h4 class="cell dark">{{ car.breakVery }}</h4>
+						<h4 class="cell">{{ car.breakGood }}</h4>
+						<h4 class="cell dark">{{ car.breakMed }}</h4>
+						<h4 class="cell">{{ car.breakBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">نظام الوقود:</h5>
+						<h4 class="cell dark">{{ car.fuelVery }}</h4>
+						<h4 class="cell">{{ car.fuelGood }}</h4>
+						<h4 class="cell dark">{{ car.fuelMed }}</h4>
+						<h4 class="cell">{{ car.fuelBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">الأنوار:</h5>
+						<h4 class="cell dark">{{ car.lightVery }}</h4>
+						<h4 class="cell">{{ car.lightGood }}</h4>
+						<h4 class="cell dark">{{ car.lightMed }}</h4>
+						<h4 class="cell">{{ car.lightBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">التوجية:</h5>
+						<h4 class="cell dark">{{ car.tawgeehVery }}</h4>
+						<h4 class="cell">{{ car.tawgeehGood }}</h4>
+						<h4 class="cell dark">{{ car.tawgeehMed }}</h4>
+						<h4 class="cell">{{ car.tawgeehBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">نظام التبريد:</h5>
+						<h4 class="cell dark">{{ car.tabreedVery }}</h4>
+						<h4 class="cell">{{ car.tabreedGood }}</h4>
+						<h4 class="cell dark">{{ car.tabreedMed }}</h4>
+						<h4 class="cell">{{ car.tabreedBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">نظام العادم:</h5>
+						<h4 class="cell dark">{{ car.aademVery }}</h4>
+						<h4 class="cell">{{ car.aademGood }}</h4>
+						<h4 class="cell dark">{{ car.aademMed }}</h4>
+						<h4 class="cell">{{ car.aademBad }}</h4>
+					</div>
+					<div class="row">
+						<h5 class="cell">القابض:</h5>
+						<h4 class="cell dark">{{ car.qabedVery }}</h4>
+						<h4 class="cell">{{ car.qabedGood }}</h4>
+						<h4 class="cell dark">{{ car.qabedMed }}</h4>
+						<h4 class="cell">{{ car.qabedBad }}</h4>
+					</div>
+				</div>
+
+				<hr>
+		    	<div class="video-container">
+					{% if car.videoID %}
+		    		{% autoescape off %}
+		        		<iframe width="932" height="524" src="https://www.youtube.com/embed/{{ car.videoID }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		        	{% endautoescape %}
+					{% endif %}
+		    	</div>
+		  	</div>
+		</div>
+		<hr>
+
+	<div class="w3-container w3-center">
+		  	<h2>اعلانات</h2>
+			{% for ad in ads %}
+		  	<div class="w3-card-4 ad">
+				{% if user.is_authenticated %}
+				{% if user.is_superuser %}
+				<a href="{% url 'adDelete' ad.id car.id %}" class='w3-btn center' style="color:red;">حذف</a>
+				{% endif %}
+				{% endif %}
+				<div class="half vertical">
+					<h4>اسم المعلن: {{ ad.advertiser }}</h4>
+					<h4>سعر السيارة: {{ ad.price }} $</h4>
+					<h4>رقم الموبايل: {{ ad.mobile }}</h4>
+					<h4>لون السيارة: {{ ad.carColor }}</h4>
+					<h4>طريقة الدفع: {{ ad.paymentWay }}</h4>
+					<h4>نوع الوقود: {{ ad.fuel }}</h4>
+					<h4>الحالة: {{ ad.status }}</h4>
+					<h4>نوع ناقل الحركة: {{ ad.driver }}</h4>
+					<h4>البلد: {{ ad.country }}</h4>
+					{% if ad.sold %}
+					<h4 style="color:red;">مباع</h4>
+					{% else %}
+					<h4 style="color:blue;">متوفر</h4>
+					{% endif %}
+				</div>
+				<br><br><br>
+				{% if ad.sold %}
+				{% if user.username == ad.username %}
+				<h4><a style="color:blue;" href="{% url 'changeSold' ad.id car.id %}">اجعله متوفر</a></h4>
+				{% endif %}
+				{% else %}
+				{% if user.username == ad.username %}
+				<h4><a style="color:red;" href="{% url 'changeSold' ad.id car.id %}">اجعله مباع</a></h4>
+				{% endif %}
+				{% endif %}
+				<div class="half vertical">
+					{% if ad.image %}
+					<img src="{{ ad.image }}" alt="Alps" style="width:100%; height:60%; object-fit:cover;">
+					{% endif %}
+					{% if ad.image1 %}
+					<img src="{{ ad.image1 }}" alt="Alps" style="width:100%; height:60%; object-fit:cover;">
+					{% endif %}
+					{% if ad.image2 %}
+					<img src="{{ ad.image2 }}" alt="Alps" style="width:100%; height:60%; object-fit:cover;">
+					{% endif %}
+					{% if ad.image3 %}
+					<img src="{{ ad.image3 }}" alt="Alps" style="width:100%; height:60%; object-fit:cover;">
+					{% endif %}
+					{% if ad.image4 %}
+					<img src="{{ ad.image4 }}" alt="Alps" style="width:100%; height:60%; object-fit:cover;">
+
+					{% endif %}
+
+		    		<div class="video-container vid">
+						{% if ad.videoID %}
+		    			{% autoescape off %}
+		        		<iframe width="100px" height="50px" src="https://www.youtube.com/embed/{{ ad.videoID }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		        		{% endautoescape %}
+						{% endif %}
+		    		</div>
+				</div>
+
+
+
+		  	</div>
+			{% if ad.image %}
+					<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+					{% endif %}
+					{% if ad.image1 %}
+					<br><br><br><br><br>
+					{% endif %}
+					{% if ad.image2 %}
+					<br><br><br><br><br>
+					{% endif %}
+					{% if ad.image3 %}
+					<br><br><br><br><br>
+					{% endif %}
+					{% if ad.image4 %}
+					<br><br><br><br><br>
+					{% endif %}
+
+			<hr>
+			{% endfor %}
+			<ul style="padding:30px;">
+				{% for comment in comments %}
+				  <hr>
+				<h6><li><p>{{comment.CommentText}}. &emsp; <small>{{comment.username}}</small></p></li></h6>
+				  <hr>
+				{% endfor %}
+			</ul>
+			{% if user.is_authenticated %}
+			  <form action="{% url 'comment' car.id %}" method="post">
+				{% csrf_token %}
+				<div class="form-group">
+				  <input class="form-control" type="text" name="comment" placeholder="أضف تعليق">
+				</div>
+				<input class="btn btn-primary" type="submit" value="تعليق">
+			  </form>
+			{% endif %}
+
+	</div>
+
+
+	<style>
+		.container{
+	    display: flex;
+	    flex-wrap: wrap;
+	    flex-direction: unset;
+	    width: 100%;
+		}
+		#navbar
+		{
+    	height: 40px;
+    	background-color: #4aab5e;
+    	justify-content: left;
+		}
+		#navbar a{
+	    text-decoration: none;
+    	color: white;
+	    font-size: 20px;
+		}
+		#navbar a:hover{
+	    color: black;
+    	cursor: pointer;
+		}
+
+		.txtdrk{
+		color: #1765a2;
+		}
+
+
+		.row{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		width: 100%;
+		height: 50px;
+		}
+		.cell{
+		width: 15%;
+		margin: 0;
+		border: 2px solid;
+		text-align:center;
+		}
+		.dark{
+		background-color: #1765a2;
+		color: white;
+		border: 2px solid black;
+		}
+
+		.ad{
+		display: flex;
+		flex-direction: column;
+		width: 400px;
+		height:700px;
+		}
+		.half{
+		height: 40%;
+		width: 100%;
+		display: flex;
+		}
+		.horizontal{
+		display: flex;
+		flex-direction:row;
+		}
+		.vertical{
+		display: flex;
+		flex-direction:column;
+		}
+		.vid{
+		height:50%;
+		width: 100%;
+		}
+
+		.space{
+		height:50px;
+		}
+		.right{
+		justify-content: right;
+		}
+		.alright{
+		align-items: right;
+		}
+		.label{
+		margin-right: 10px;
+		margin-left: 10px;
+		}
+		.mrgndwn{
+		margin-bottom: 20px;
+		}
+
+		@media (max-width:600px)
+		{
+			.row{
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		width: 100%;
+		height: 90px;
+		}
+		.row h6{
+			font-size: 17px;
+		}
+			.cell{
+			width: 20%;
+			margin: 0;
+			border: 2px solid;
+			text-align:center;
+			font-size: 20px;
+			}
+			.dark{
+		background-color: #1765a2;
+		color: white;
+		border: 2px solid black;
+		}
+
+		.block{
+			width: 100px;
+		}
+		.btnMob{
+			overflow-wrap: break-word;
+		}
+		#navbar
+		{
+    	height: 90px;
+    	background-color: #4aab5e;
+    	justify-content: center;
+		}
+		#navbar a{
+	    text-decoration: none;
+    	color: white;
+	    font-size: 15px;
+		}
+		#navbar a:hover{
+	    color: black;
+    	cursor: pointer;
+		}
+		}
+
+	</style>
+
+
+	</body>
+</html>

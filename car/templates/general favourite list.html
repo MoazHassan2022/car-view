@@ -1,0 +1,271 @@
+<!-- List -->
+
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>
+            Carmap
+        </title>
+        <script type="text/javascript">
+        function googleTranslateElementInit() {
+          new google.translate.TranslateElement({pageLanguage: 'ar', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+        }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    </head>
+    <body dir="rtl">
+        <div class="main vertical">
+            <div class="container horizontal" id="navbar">
+                <a href="/">الرئيسية</a>
+            </div>
+            <div id="google_translate_element"></div>
+            <div class="enwan">
+                <h2>السيارات المفضلة للزائرين</h2>
+            </div>
+              <a href="/list" class='w3-btn w3-green' style="width:100px;">كل السيارات</a>
+            <div class="container horizontal">
+            {% for car in cars %}
+
+                <div class="card">
+
+                    <div class="parent">
+                        <h5>{{ car.username }}</h5>
+                        {% if car.userPic %}
+                        <div class="container logo1 vertical center">
+                            <img src="{{ car.userPic }}">
+                        </div>
+                        {% endif %}
+                        {% if car.image %}
+                        <img src="{{ car.image }}">
+                        {% endif %}
+                        {% if car.logo %}
+                        <div class="container logo vertical center">
+                            <img src="{{ car.logo }}">
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="container vertical center">
+                        <h3>{{ car.name }}</h3>
+                        <ul>
+                        {% for c in car.commentList.all %}
+                        <h6><li><p>{{ c.CommentText }} &emsp; <small>{{ c.username }}</small></p></li></h6>
+                        {% endfor %}
+                        </ul>
+                        <div class="container horizontal">
+                            <a href='/{{ car.carID }}' class='btn'>عرض</a>
+
+                            <form action="{% url 'genFavList' %}" method="post">
+                                {% csrf_token %}
+                                <p>
+                                <small>
+                                <button type="submit" name="id" value="{{ car.id }}" class='btn'>أعجبني</button>
+                                {{ car.likesCount }} اعجاب</small>
+                                </p>
+                            </form>
+                            <form action="{% url 'addCommentFav' %}" method="post">
+                                {% csrf_token %}
+                                <p>
+                                <input type="text" name="commentText" placeholder="أضف تعليق">
+                                <button type="submit" name="id" value="{{ car.id }}" class='btn'>تعليق</button>
+                                </p>
+                            </form>
+
+                        </div>
+
+                        <br/><br/>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+            {% load static %}
+            <div onclick="topFunction()" id="home">
+                <img id="upCar" src="{% static 'home.png' %}">
+            </div>
+            <div class="container horizontal" id="adBanner">
+                <h4>بانر إعلاني "تجريبي"</h4>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+
+
+            //Get the button:
+            var mybutton = document.getElementById("upCar");
+
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {scrollFunction()};
+
+            function scrollFunction() {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    mybutton.style.display = "block";
+                } else {
+                    mybutton.style.display = "none";
+                    mybutton.classList.remove("voom");
+                }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+            mybutton.classList.add("voom");
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            }
+
+
+    </script>
+
+        <style>
+            *{
+    margin:0;
+    padding:0;
+    text-align: right;
+    transition: all .2s;
+    scroll-behavior:smooth;
+}
+
+.main{
+    max-width: 100vw;
+    display: flex;
+    flex-direction: unset;
+    background-color: rgb(221, 218, 218);
+}
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: unset;
+    width: 100%;
+}
+
+.enwan{
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 35px;
+}
+
+.vertical{
+    flex-direction: column;
+}
+.horizontal{
+    flex-direction: row;
+}
+.horizontal a{
+    margin-left: 5px;
+}
+.center{
+    align-items: center;
+}
+
+#navbar
+{
+    height: 30px;
+    background-color: #4aab5e;
+    justify-content: left;
+}
+#navbar a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+#navbar a:hover{
+    color: black;
+    cursor: pointer;
+}
+.card{
+    width:400px;
+    height: 500px;
+    background-color: white;
+    color: black;
+    border-color:transparent;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    border-radius: 5px;
+}
+.card .parent{
+    width: 100%;
+    height: 80%;
+    position: relative;
+}
+.parent img{
+    width:100%;
+    height:90%;
+    object-fit: cover;
+}
+.logo{
+    background: none;
+    background-color: none;
+    position: absolute;
+    bottom: 0;
+}
+.logo img{
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    object-fit: scale-down;
+}
+.logo1{
+    background: none;
+    background-color: none;
+    position: absolute;
+    top: 5;
+}
+.logo1 img{
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    object-fit: scale-down;
+}
+.btn{
+    text-decoration: none;
+    color: gray;
+    background: none;
+}
+.btn:hover{
+    background-color: rgba(100, 100, 100, 0.479);
+}
+
+#home {
+  position: fixed; /* Fixed/sticky position */
+  bottom: 10px; /* Place the button at the bottom of the page */
+  left: 10px; /* Place the button 30px from the right */
+  cursor: pointer; /* Add a mouse pointer on hover */
+}
+#upCar{
+    display: none; /* Hidden by default */
+    object-fit: contain;
+    width: 50px;
+    height: 50px;
+
+    position: fixed; /* Fixed/sticky position */
+  bottom: 50px; /* Place the button at the bottom of the page */
+  left: 10px; /* Place the button 30px from the right */
+}
+.voom{
+    transform: translate(0, -1000px);
+}
+
+#adBanner{
+    height: 40px;
+    background-color: #4aab5e;
+    position: fixed;
+    bottom: 0;
+}
+
+
+@media (max-width: 600px){
+
+}
+
+        </style>
+
+    </body>
+</html>
